@@ -1,3 +1,23 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+.button-login {
+    @apply bg-red-500 hover:bg-red-900 px-5 py-3 rounded-lg text-white font-bold uppercase;
+}
+
+.button-signup{
+    @apply bg-slate-700 hover:bg-black px-5 py-3 rounded-lg text-white font-bold uppercase;
+}
+
+.input-style {
+    @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none;
+}
+
+.input-button{
+    @apply bg-red-500 hover:bg-red-900 w-full p-2 text-white uppercase font-bold cursor-pointer;
+}
+
+.error {
+    @apply my-2 bg-gray-200 border-l-4 border-red-500 text-red-700 p-4;
+}

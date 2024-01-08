@@ -18,10 +18,14 @@ const Header = () => {
         
        <div className='flex gap-2'>
          <Link href="/login" legacyBehavior>
-            <a className='bg-red-700 hover:bg-red-500 px-5 py-3 rounded-lg text-white font-bold uppercase'>Log In</a>
+            <a className='button-login'>
+                Log In
+            </a>
         </Link>
         <Link href="/createAccount" legacyBehavior>
-            <a className='bg-black hover:bg-slate-700 px-5 py-3 rounded-lg text-white font-bold uppercase'>Join Us</a>
+            <a className='button-signup'>
+                Sign Up
+            </a>
         </Link>
        </div>
     </header>
