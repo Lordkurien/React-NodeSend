@@ -1,9 +1,13 @@
-import React from 'react';
+import { useContext } from "react";
+import authContext from "../context/auth/authContext";
 import Layout from "../components/Layout";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
 const CreateAccount = () => {
+    const AuthContext = useContext(authContext);
+    const { registerUser  } = AuthContext;
+
     const formik = useFormik({
         initialValues: {
             name: "",
@@ -20,8 +24,8 @@ const CreateAccount = () => {
                 .min(6, "The password must be at least 6 characters long")
                 .required("The password is required")
         }),
-        onSubmit: () => {
-            console.log("Formulario enviado...");
+        onSubmit: (values) => {
+            registerUser(values);
         }
     });
 
@@ -91,7 +95,7 @@ const CreateAccount = () => {
                             Password
                         </label>
                         <input 
-                            type='text'
+                            type='password'
                             className='input-style'
                             id='password' 
                             placeholder='Choose your Password'
