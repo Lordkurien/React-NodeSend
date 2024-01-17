@@ -1,9 +1,24 @@
-import React from "react";
+import { useContext, useEffect } from "react";
 import Layout from "../components/Layout";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import authContext from "../context/auth/authContext";
+import Alert from "../components/Alert";
+import { useRouter } from "next/router";
 
 const Login = () => {
+
+    const AuthContext = useContext(authContext);
+    const { login, message, authenticated } = AuthContext;
+
+    const router = useRouter();
+
+    useEffect(() => {
+      if (authenticated){
+          router.push("/");
+      }
+    }, [authenticated])
+
     const formik = useFormik({
         initialValues: {
             email: "",
@@ -17,8 +32,8 @@ const Login = () => {
                 .min(6, "The password must be at least 6 characters long")
                 .required("The password is required")
         }),
-        onSubmit: () => {
-            console.log("Formulario enviado...");
+        onSubmit: (values) => {
+            login(values);
         }
     });
 
@@ -27,6 +42,8 @@ const Login = () => {
        <div className='md:w-4/5 xl:w-3/5 mx-auto mb-32'>
         <h2 className='text-4xl font-sans font-bold text-gray-800 text-center my-4'>Log In</h2>
         
+        {message && <Alert />}
+
         <div className='flex justify-center mt-5'>
             <div className='max-w-lg w-full'>
                 <form 
@@ -64,7 +81,7 @@ const Login = () => {
                             Password
                         </label>
                         <input 
-                            type='text'
+                            type='password'
                             className='input-style'
                             id='password' 
                             placeholder='Choose your Password'
