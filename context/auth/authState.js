@@ -7,9 +7,11 @@ import {
     REGISTER_ERROR,
     CLEAN_ALERT,
     LOGIN_SUCCESS,
-    LOGIN_ERROR
+    LOGIN_ERROR,
+    LOG_OUT
 } from "../../types";
 import axiosClient from "../../config/axios";
+import tokenAuth from "../../config/tokenAuth";
 
 const AuthState = ({ children }) => {
     const initialState = {
@@ -65,7 +67,29 @@ const AuthState = ({ children }) => {
     }
 
     const userAuthenticated = async () => {
-        
+        const token = localStorage.getItem("token");
+        if (token) {
+            tokenAuth(token);
+        }
+
+        try {
+            const response = await axiosClient("/api/auth");
+            dispatch({
+                type: USER_AUTHENTICATED,
+                payload: response.data.user
+            })
+        } catch (error) {
+             dispatch({
+                type: LOGIN_ERROR,
+                payload: error.response.data.msg
+            });
+        }
+    }
+
+    const logOut = () => {
+        dispatch({
+            type: LOG_OUT,
+        })
     }
 
     return (
@@ -76,7 +100,8 @@ const AuthState = ({ children }) => {
             message: state.message,
             registerUser,
             userAuthenticated,
-            login
+            login,
+            logOut
         }}>
             {children}
         </authContext.Provider>

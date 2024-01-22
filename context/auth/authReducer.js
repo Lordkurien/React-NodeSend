@@ -1,9 +1,11 @@
 import {
+    USER_AUTHENTICATED,
     REGISTER_SUCCESS,
     REGISTER_ERROR,
     CLEAN_ALERT,
     LOGIN_ERROR,
-    LOGIN_SUCCESS
+    LOGIN_SUCCESS,
+    LOG_OUT
 } from "../../types";
 
 const authReducer = (state, action) => {
@@ -26,6 +28,19 @@ const authReducer = (state, action) => {
             return {
                 ...state,
                 message: null
+            }
+        case USER_AUTHENTICATED:
+            return {
+                ...state,
+                user: action.payload
+            }
+        case LOG_OUT:
+            localStorage.removeItem("token");
+            return {
+                ...state,
+                user: null,
+                token: null,
+                authenticated: null
             }
         default:
             return state;

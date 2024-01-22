@@ -1,8 +1,17 @@
-import React from 'react';
+import { useEffect, useContext } from 'react';
 import Image from 'next/image';
 import Link from "next/link";
+import authContext from '../context/auth/authContext';
 
 const Header = () => {
+
+  const AuthContext = useContext(authContext);
+  const { userAuthenticated, user, logOut } = AuthContext;
+
+  useEffect(() => {
+    userAuthenticated();
+  }, [])
+
   return (
     <header className='py-8 flex flex-col md:flex-row items center justify-between'>
         <Link href="/" legacyBehavior>
@@ -17,16 +26,33 @@ const Header = () => {
         
         
        <div className='flex gap-2'>
-         <Link href="/login" legacyBehavior>
-            <a className='button-login'>
-                Log In
-            </a>
-        </Link>
-        <Link href="/createAccount" legacyBehavior>
-            <a className='button-signup'>
-                Sign Up
-            </a>
-        </Link>
+        {
+          user ? (
+            <div className='flex items-center'>
+              <p className='mr-2'>Welcome {user.name} </p>
+              <button 
+                onClick={() => logOut()}
+                type='button' 
+                className='button-signup'
+              >
+                Log Out  
+              </button>
+            </div>
+          ): (
+              <>
+                <Link href="/login" legacyBehavior>
+                  <a className='button-login'>
+                    Log In
+                  </a>
+                </Link>
+                <Link href="/createAccount" legacyBehavior>
+                  <a className='button-signup'>
+                    Sign Up
+                  </a>
+                </Link>
+              </>
+          )
+        }         
        </div>
     </header>
   )
