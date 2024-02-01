@@ -26,3 +26,10 @@
     @apply bg-red-500 py-2 px-3 w-full my-3 max-w-lg text-center text-white mx-auto rounded-lg uppercase font-semibold;
 }
 
+.button-link{
+    @apply bg-blue-700 w-full font-bold py-3 rounded-lg text-white my-10 hover:bg-blue-800 uppercase;
+}
+
+.select-downloads-password {
+    @apply appearance-none mt-2 bg-white w-full border border-gray-400 text-black py-3 px-4 pr-8 rounded leading-none focus:outline-none focus:border-gray-500;
+}

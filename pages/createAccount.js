@@ -43,30 +43,30 @@ const CreateAccount = () => {
                     className='bg-white rounded-lg shadow-md px-8 pt-6 pb-8 mb-4' 
                     onSubmit={formik.handleSubmit}
                 >
-                    <div className='mb-4'>
-                        <label 
-                            htmlFor='name'
-                            className='block text-black text-sm font-bols mb-2'>
-                            Name
-                        </label>
-                        <input 
-                            type='text'
-                            className='input-style'
-                            id='name' 
-                            placeholder='User Name'
-                            value={formik.values.name}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                        />
-                        
-                        {formik.touched.name && formik.errors.name ? (
-                            <div className='error'>
-                                    <p className='font-bold'>Error</p>
-                                    <p>{formik.errors.name}</p>
-                            </div>
-                        ): null}
-                        
-                    </div>
+                <div className='mb-4'>
+                    <label 
+                        htmlFor='name'
+                        className='block text-black text-sm font-bols mb-2'>
+                        Name
+                    </label>
+                    <input 
+                        type='text'
+                        className='input-style'
+                        id='name' 
+                        placeholder='User Name'
+                        value={formik.values.name}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                    />
+                    
+                    {formik.touched.name && formik.errors.name ? (
+                        <div className='error'>
+                                <p className='font-bold'>Error</p>
+                                <p>{formik.errors.name}</p>
+                        </div>
+                    ): null}
+                    
+                </div>
                     <div className='mb-4'>
                         <label 
                             htmlFor='email'
